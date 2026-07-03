@@ -1,25 +1,18 @@
-// import ExternalApiDataFetch from "./Pages/externalDataCalling"
-
-import Customers from "./Pages/example"
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LandingPage from "./Pages/LandingPage";
+import LoginPage from "./Pages/LoginPage";
+import RegisterPage from "./Pages/RegisterPage";
 
 function App() {
-  return(
-    <>
-    {/* <Button onClick={()=>console.log("Button 1 is clicked")}title = {"Click Me"}/>
-    <Button onClick={()=>console.log("Button 2 is clicked") }title = {"Register"}/>
-    <Button onClick={()=>console.log("Button 3 is clicked")}title = {"Login"}/>
-      <FruitList/> */}
-
-        {/* <Test/>
-        <UserDetailPage/> */}
-    <ExternalApiDataFetch/>
-
-    {/* <Customers/> */}
-
-
-    </>
-  )
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
