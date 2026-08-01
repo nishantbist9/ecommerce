@@ -1,15 +1,16 @@
 import { useState } from "react";
 import Navbar from "../component/Navbar";
+import axios from "axios";
 
 function RegisterPage() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    address: "",
-    email: "",
-    contact: "",
-    password: ""
-  });
+ const [formData, setFormData] = useState({
+  firstName: "",
+  lastName: "",
+  address: "",
+  email: "",
+  phone: "",
+  password: ""
+});
 
   const handleChange = (e) => {
     setFormData({
@@ -18,11 +19,23 @@ function RegisterPage() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Registration successful!");
-    console.log(formData);
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const res = await axios.post(
+      "http://localhost:5000/api/auth/register",
+      formData
+    );
+
+    alert(res.data.message);
+
+    console.log(res.data);
+
+  } catch (error) {
+    alert(error.response?.data?.message || "Registration Failed");
+  }
+};
 
   return (
     <>
@@ -64,13 +77,13 @@ function RegisterPage() {
             required
           />
 
-          <input
-            type="text"
-            name="contact"
-            placeholder="Contact Number"
-            onChange={handleChange}
-            required
-          />
+        <input
+  type="text"
+  name="phone"
+  placeholder="Contact Number"
+  onChange={handleChange}
+  required
+/>
 
           <input
             type="password"
